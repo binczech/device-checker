@@ -6,7 +6,6 @@ import { Button, Title } from 'layout';
 import { Login } from 'user/types';
 
 interface Props {
-    // eslint-disable-next-line no-unused-vars
     onSubmit(values: Login): void;
 }
 
@@ -15,7 +14,7 @@ const LoginFormBase: FunctionComponent<Props> = (props) => {
 
   return (
     <Form
-      name="normal_login"
+      name="login"
       className="login-form"
       onFinish={onSubmit}
     >

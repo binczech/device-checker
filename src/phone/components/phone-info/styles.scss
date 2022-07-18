@@ -1,0 +1,37 @@
+.phone {
+    background: #fff;
+    border: 1px solid #cdcdcd;
+    border-radius: 2x;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.phone-image {
+    height: 125px;
+}
+
+.empty-image {
+    height: 126px;
+}
+
+.model {
+    font-size: 24px;
+    line-height: 1.5;
+    margin-top: 20px;
+}
+
+.vendor {
+    font-size: 14px;
+    color: #898989;
+    line-height: 1;
+}
+
+.borrow-info {
+    bottom: 0;
+    line-height: 1;
+    background: rgba(0, 0, 0, 0.7);
+    width: 100%;
+    padding: 5px;
+    color: #fff;
+    font-size: 13px;
+}

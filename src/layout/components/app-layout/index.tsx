@@ -1,24 +1,22 @@
 import { Layout } from 'antd';
-import { Content, Header } from 'antd/lib/layout/layout';
+import { Header } from 'antd/lib/layout/layout';
 import React, { FunctionComponent, memo, PropsWithChildren } from 'react';
 
 import { LoggedInUser } from '../logged-in-user';
 import { Title } from '../title';
 
-import './styles.scss';
+interface Props {
+  fullWidth?: boolean;
+}
 
-const AppLayoutBase: FunctionComponent<PropsWithChildren> = ({ children }) => (
+const AppLayoutBase: FunctionComponent<PropsWithChildren<Props>> = ({ children, fullWidth }) => (
   <Layout>
     <Header>
       <div>
         <Title isSiteTitle text="Device Checker" />
         <LoggedInUser />
       </div>
-      <div className="content">
-        <Content>
-          {children}
-        </Content>
-      </div>
+      {children}
     </Header>
   </Layout>
 );

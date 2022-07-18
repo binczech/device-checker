@@ -8,6 +8,6 @@ export interface Phone {
     vendor: string;
     model: string;
     osVersion: string;
-    image: string;
-    borrowed: Borrowed
+    image?: string;
+    borrowed?: Borrowed
 }

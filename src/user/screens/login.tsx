@@ -2,6 +2,7 @@ import React, {
   FunctionComponent, memo, useCallback, useContext,
 } from 'react';
 
+import { Content } from 'layout';
 import { LoginForm } from 'user/components';
 import { loginUser } from 'user/model/api';
 import { Login as LoginType } from 'user/types';
@@ -15,7 +16,9 @@ const LoginBase: FunctionComponent = () => {
   }, [setUser]);
 
   return (
-    <LoginForm onSubmit={onSubmit} />
+    <Content limitedWidth>
+      <LoginForm onSubmit={onSubmit} />
+    </Content>
   );
 };
 

@@ -7,9 +7,7 @@ interface Props {
     max?: number;
     step?: number;
     showMinMax?: boolean;
-    // eslint-disable-next-line no-unused-vars
     onChange?(value: number): void;
-    // eslint-disable-next-line no-unused-vars
     onAfterChange?(value: number): void;
 }
 

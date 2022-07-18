@@ -4,3 +4,7 @@ export * from './slider';
 export * from './loader';
 export * from './divider';
 export * from './button';
+export * from './form-item';
+export * from './notifications';
+export * from './form-buttons';
+export * from './content';
