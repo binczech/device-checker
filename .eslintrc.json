@@ -1,0 +1,105 @@
+{
+    "env": {
+        "browser": true,
+        "es2021": true
+    },
+    "extends": [
+        "plugin:react/recommended",
+        "airbnb"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": "latest",
+        "sourceType": "module"
+    },
+    "plugins": [
+        "react",
+        "react-hooks",
+        "@typescript-eslint"
+    ],
+    "settings": {
+        "import/resolver": {
+            "node": {
+              "extensions": [".js", ".jsx", ".ts", ".tsx"],
+              "moduleDirectory": ["src", "node_modules"]
+            }
+        }
+    },
+    "rules": {
+        "import/order": [
+            "error",
+            {
+              "groups": [
+                [
+                  "builtin",
+                  "external"
+                ],
+                "internal",
+                [
+                  "parent",
+                  "sibling",
+                  "index"
+                ],
+                "object",
+                "type"
+              ],
+              "newlines-between": "always",
+              "alphabetize": {
+                "order": "asc"
+              },
+              "pathGroups": [
+                {
+                  "pattern": "../**/*.{sass,css,less}",
+                  "group": "object"
+                }, {
+                  "pattern": "./**/*.{sass,css,less}",
+                  "group": "object"
+                }, {
+                  "pattern": "**/*.{sass,css,less}",
+                  "group": "object"
+                }, {
+                  "pattern": "../**/*.{jpg,jpeg,png,gif,svg,ico}",
+                  "group": "type"
+                }, {
+                  "pattern": "./**/*.{jpg,jpeg,png,gif,svg,ico}",
+                  "group": "type"
+                }, {
+                  "pattern": "**/*.{jpg,jpeg,png,gif,svg,ico}",
+                  "group": "type"
+                }
+              ]
+            }
+        ],
+        "react/jsx-filename-extension": [1, { "extensions": [".tsx", ".ts"] }],
+        "import/extensions": [
+            "error",
+            "ignorePackages",
+            {
+              "js": "never",
+              "jsx": "never",
+              "ts": "never",
+              "tsx": "never"
+            }
+        ],
+        "react/function-component-definition": [
+            2,
+            {
+                "namedComponents": "arrow-function",
+                "unnamedComponents": "arrow-function"
+            }
+        ],
+        "max-len": [
+            "error",
+            {
+              "code": 120
+            }
+        ],
+        "import/prefer-default-export": "off",
+        "react/require-default-props": "off",
+        "react-hooks/exhaustive-deps": "error",
+        "class-methods-use-this": "off"
+    }
+}

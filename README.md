@@ -1,46 +1,47 @@
-# Getting Started with Create React App
+# Author comment
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+I was given 4 hours to complete this task. I learned react-query for this task. I also had to setup whole project for this task. I did not care much about UI and responsivity due to lack of time. Despite this I tried a little so that app looked at least acceptable.
 
-## Available Scripts
+It took me 4 hours to complete it. I took some time to make sure data from API are valid. I also focused on code structuring (had to setup tsconfig) and code styling (had to setup eslint).
 
-In the project directory, you can run:
+I did not use Redux nor MobX for global state management. I replaced them with React Query as it is enough for global state management in smaller projects ([https://react-query.tanstack.com/guides/does-this-replace-client-state](https://react-query.tanstack.com/guides/does-this-replace-client-state)).
 
-### `npm start`
+React Query also provides requests caching so there is no need to implement my own caching system.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+I'm not satisfied with the result and would improve it.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+# Simple loan calculator
+## The task
+As a user who needs to borrow some money I would like to have the ability to choose the
+amount and term of the loan so that I know what will be my monthly instalment and interest.
+Example of a production application: [https://www.vivus.com.mx/](https://www.vivus.com.mx/)
+### Features
+* 2 sliders
+    * 1st slider controls the amount
+    * 2nd slider controls the term (number of loan)
+* The calculator has a configuration. The configuration contains the minimum, maximum and step
+for both amount and term. It also contains the default value.
+* Each slider has also a <select> besides it. The <select> contains all possible values (take step
+into account).
+* If either of these control elements change the second one must be updated as well (slider
+changes -> select is updated and vice versa).
+The API
+API is available at [https://js-developer-second-round.herokuapp.com/api/v1/](https://js-developer-second-round.herokuapp.com/api/v1/)
+* [https://js-developer-second-round.herokuapp.com/api/v1/application/constraints](https://js-developer-second-round.herokuapp.com/api/v1/application/constraints) contains
+the configuration values for the calculator (min, max, default value, step for both amount
+and term)
+* [https://js-developer-second-round.herokuapp.com/api/v1/application/real-first-loan-offer?
+amount=1000&term=5](https://js-developer-second-round.herokuapp.com/api/v1/application/real-first-loan-offer?
+amount=1000&term=5) this endpoint works exactly in the same way as /api/v1/
+application/first-loan-offer the only difference being that it behaves more like a real-life
+service in the way that it has latency (xrandomly between 0 and 1000 ms)
+#### Needed
+* Use React Hooks
+* Use Typescript
+* Use Global state
+* Cache all requests so the application is more responsive to user input - meaning -
+if I have already called request for 1000 dollars and 15 months, then whenever later I
+would again want to display the amount for this combination there would not be any call
+on api but the cached value would be displayed.
+#### Objective
+Good user experience and not redundant network requests.
