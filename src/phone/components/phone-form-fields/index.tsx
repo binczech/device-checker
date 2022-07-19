@@ -1,75 +1,70 @@
-import { BaseOptionType } from 'antd/lib/select';
+import { Rule } from 'antd/lib/form';
 import React, { FunctionComponent, memo } from 'react';
 
+import { manufacturerOptions, operationSystemOptions } from 'consts';
 import { FormItem } from 'layout';
+import { useGetPhones } from 'phone/model';
 
-const manufacturerOptions: Array<BaseOptionType> = [
-  { label: 'Apple', value: 'Apple' },
-  { label: 'Samsung', value: 'Samsung' },
-  { label: 'Huawei', value: 'Huawei' },
-  { label: 'Xiaomi', value: 'Xiaomi' },
-  { label: 'Oppo', value: 'Oppo' },
-  { label: 'Vivo', value: 'Vivo' },
-  { label: 'Nokia', value: 'Nokia' },
-  { label: 'Sony', value: 'Sony' },
-  { label: 'LG', value: 'LG' },
-  { label: 'Motorola', value: 'Motorola' },
-  { label: 'Asus', value: 'Asus' },
-  { label: 'Blackberry', value: 'Blackberry' },
-  { label: 'Alcatel', value: 'Alcatel' },
-  { label: 'ZTE', value: 'ZTE' },
-  { label: 'HTC', value: 'HTC' },
-  { label: 'Microsoft', value: 'Microsoft' },
-  { label: 'Google', value: 'Google' },
-];
+interface Props {
+  phoneCodeInEdit?: string;
+}
 
-const operationSystemOptions: Array<BaseOptionType> = [
-  { label: 'Android', value: 'Android' },
-  { label: 'iOS', value: 'iOS' },
-  { label: 'Windows', value: 'Windows' },
-];
+const PhoneFormFieldsBase: FunctionComponent<Props> = ({ phoneCodeInEdit }) => {
+  const { data } = useGetPhones();
 
-const PhoneFormFieldsBase: FunctionComponent = () => (
-  <>
-    <FormItem
-      name="code"
-      label="Code designation (identifier)"
-      required
-    />
+  const usedCodes = (data || []).map(({ code }) => code).filter((code) => code !== phoneCodeInEdit);
 
-    <FormItem
-      name="vendor"
-      label="Manufacturer"
-      type="select"
-      options={manufacturerOptions}
-      required
-    />
+  const codeUniqueRule: Rule = {
+    validator(_, value: string) {
+      if (usedCodes.includes(value)) {
+        return Promise.reject(new Error('Code already used'));
+      }
+      return Promise.resolve();
+    },
+  };
+  return (
+    <>
+      <FormItem
+        name="code"
+        label="Code designation (identifier)"
+        customRules={[codeUniqueRule]}
+        required
+      />
 
-    <FormItem
-      name="model"
-      label="Model"
-      required
-    />
+      <FormItem
+        name="vendor"
+        label="Manufacturer"
+        type="select"
+        options={manufacturerOptions}
+        required
+      />
 
-    <FormItem
-      name="os"
-      label="Operation system"
-      type="select"
-      options={operationSystemOptions}
-      required
-    />
+      <FormItem
+        name="model"
+        label="Model"
+        required
+      />
 
-    <FormItem
-      name="osVersion"
-      label="Operation system version"
-      required
-    />
+      <FormItem
+        name="os"
+        label="Operation system"
+        type="select"
+        options={operationSystemOptions}
+        required
+      />
 
-    <FormItem
-      name="image"
-      label="Image (URL)"
-    />
-  </>
-);
+      <FormItem
+        name="osVersion"
+        label="Operation system version"
+        required
+      />
+
+      <FormItem
+        name="image"
+        label="Image (URL)"
+      />
+    </>
+  );
+};
 
 export const PhoneFormFields = memo(PhoneFormFieldsBase);

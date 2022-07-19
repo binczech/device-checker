@@ -5,7 +5,10 @@ import React, {
 
 import { Content, Loader } from 'layout';
 import { CreateFormModal, PhoneInfo, PhoneListActions } from 'phone/components';
+import { PhoneFilters } from 'phone/components/phone-filters';
 import { useGetPhones } from 'phone/model';
+import { PhoneFiltersType } from 'phone/types/phone-filters';
+import { getFilteredData } from 'phone/utils';
 import { LoggedInUserContext } from 'user/utils/logged-in-user-context';
 
 const ListBase: FunctionComponent = () => {
@@ -14,6 +17,7 @@ const ListBase: FunctionComponent = () => {
   } = useGetPhones();
   const { user } = useContext(LoggedInUserContext);
   const [showModal, setShowModal] = useState(false);
+  const [filters, setFilters] = useState<PhoneFiltersType>({});
 
   const openPhoneModal = useCallback(() => {
     setShowModal(true);
@@ -30,11 +34,16 @@ const ListBase: FunctionComponent = () => {
   }
 
   if (isSuccess) {
+    const filteredData = getFilteredData(data, filters);
+
     return (
       <Content>
         {user?.type === 'admin' && <PhoneListActions openPhoneModal={openPhoneModal} />}
+        <PhoneFilters
+          setNewFilters={setFilters}
+        />
         <Row gutter={[16, 16]}>
-          {data.map((phone) => (
+          {filteredData.map((phone) => (
             <Col xs={24} md={12} lg={8} xl={6} key={phone.id}>
               <PhoneInfo phone={phone} />
             </Col>

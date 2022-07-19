@@ -1,12 +1,14 @@
 # Author comment
 
-I decided to learn more about react-query in this task. I also had to setup whole project for this task. I did not care much about UI and responsivity becaused I focused on functionality a code structuring. Despite this I tried a little so that app looked at least acceptable.
+I decided to learn more about react-query in this task (useMutation, useQueryClient). I also had to setup whole project for this task. I did not care much about UI and responsivity becaused I have been focused on functionality and code structuring. Despite this I tried a little so that app looked at least acceptable.
 
-It took me 10 hours to complete it. I took some time to make sure data from API are valid. I also focused on code structuring (had to setup tsconfig) and code styling (had to setup eslint).
+It took me 11 hours to complete it. I took some time to make sure user info data from API are valid and to handle user state and keep user logged in even after reload. I also focused on code structuring (had to setup tsconfig) and code styling (had to setup eslint). I also tried to wrap functions and components that I used more than once so that I could use them in more situations and so that I would not repeat code unnecessary.
+
+I decided to slightly differ from assignment requirements. I used modal for both forms. I think it's much more user friendly than navigating user to another page. I also added filter buttons so that user can filter data right after he is satisfied with filter values.
 
 I did not use Redux nor MobX for global state management. I replaced them with React Query as it is enough for global state management in smaller projects ([https://react-query.tanstack.com/guides/does-this-replace-client-state](https://react-query.tanstack.com/guides/does-this-replace-client-state)). I also did not use Redux because I use it every day in my projects and I wanted to challenge myself to complete task without it.
 
-I'm not satisfied with the result and would improve it in terms of storing of user in localStorage a user state handling. I also would improve UI/UX as it is not very good.
+I'm not satisfied with the result and would improve it in terms of storing of user in localStorage and user state handling. I also would improve UI/UX as it is not very good. I would improve data validating from API as I did not have much time to make validations for phones endpoints.
 
 # Device checker
 ## Intro

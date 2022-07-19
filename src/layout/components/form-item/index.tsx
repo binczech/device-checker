@@ -1,8 +1,12 @@
-import { Form, Input, Select } from 'antd';
+/* eslint-disable react/no-unused-prop-types */
+import {
+  Checkbox, Form, Input, Select,
+} from 'antd';
+import { Rule } from 'antd/lib/form';
 import { BaseOptionType } from 'antd/lib/select';
-import React, { FunctionComponent, memo } from 'react';
+import React, { FunctionComponent, memo, ReactNode } from 'react';
 
-type FormItemType = 'text' | 'password' | 'select';
+type FormItemType = 'text' | 'password' | 'select' | 'checkbox';
 
 interface Props {
     type?: FormItemType;
@@ -10,7 +14,55 @@ interface Props {
     label: string;
     required?: boolean;
     options?: Array<BaseOptionType>;
+    clearable?: boolean;
+    customRules?: Array<Rule>;
 }
+
+const getField = ({
+  label, name, clearable, options, type,
+}: Props): ReactNode => {
+  switch (type) {
+    case 'password':
+      return (
+        <Input
+          placeholder={label}
+          type="password"
+        />
+      );
+
+    case 'text':
+      return (
+        <Input
+          placeholder={label}
+          type="text"
+        />
+      );
+
+    case 'select':
+      return (
+        <Select
+          placeholder={label}
+          options={options}
+          allowClear={clearable}
+        />
+      );
+
+    case 'checkbox':
+      return (
+        <Checkbox
+          name={name}
+        />
+      );
+
+    default:
+      return (
+        <Input
+          placeholder={label}
+          type="text"
+        />
+      );
+  }
+};
 
 const FormItemBase: FunctionComponent<Props> = (props) => {
   const {
@@ -18,26 +70,18 @@ const FormItemBase: FunctionComponent<Props> = (props) => {
     name,
     label,
     required = false,
-    options,
+    customRules = [],
   } = props;
 
   return (
     <Form.Item
       name={name}
       label={label}
-      rules={[{ required, message: `Please input ${label}!` }]}
+      valuePropName={type === 'checkbox' ? 'checked' : undefined}
+      rules={[{ required, message: `Please input ${label}!` }, ...customRules]}
     >
-      {(type === 'text' || type === 'password') ? (
-        <Input
-          placeholder={label}
-          type={type === 'password' ? 'password' : 'text'}
-        />
-      ) : (
-        <Select
-          placeholder={label}
-          options={options}
-        />
-      )}
+
+      {getField(props)}
     </Form.Item>
   );
 };

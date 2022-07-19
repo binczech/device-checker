@@ -1,5 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 
+import { PHONE_QUERY_NAME } from 'consts';
 import { showSuccess } from 'layout';
 import { Phone } from 'phone/types/phone';
 import { PhoneFormValues } from 'phone/types/phone-form-values';
@@ -10,7 +11,7 @@ import {
 } from './api';
 
 export const useGetPhones = () => useQuery<Array<Phone>, Error>(
-  'phones',
+  PHONE_QUERY_NAME,
   () => fetchPhones(),
 );
 
@@ -20,7 +21,7 @@ export const useToggleBorrowPhone = (phoneId: string, isBorrowed: boolean) => {
   return useMutation(
     () => toggleBorrowPhone(phoneId, isBorrowed),
     {
-      onSuccess: () => queryClient.invalidateQueries('phones'),
+      onSuccess: () => queryClient.invalidateQueries(PHONE_QUERY_NAME),
     },
   );
 };
@@ -32,7 +33,7 @@ export const useDeletePhone = (phoneId: string) => {
     () => deletePhone(phoneId),
     {
       onSuccess: () => {
-        queryClient.invalidateQueries('phones');
+        queryClient.invalidateQueries(PHONE_QUERY_NAME);
         showSuccess({ title: 'Phone deleted', description: 'Phone has been successfully deleted!' });
       },
     },
@@ -46,7 +47,7 @@ export const useEditPhone = (phoneId: string) => {
     (phone: PhoneFormValues) => editPhone(phoneId, phone),
     {
       onSuccess: () => {
-        queryClient.invalidateQueries('phones');
+        queryClient.invalidateQueries(PHONE_QUERY_NAME);
         showSuccess({ title: 'Phone edited', description: 'Phone has been successfully edited!' });
       },
     },
@@ -60,7 +61,7 @@ export const useCreatePhone = () => {
     (phone: PhoneFormValues) => createPhone(phone),
     {
       onSuccess: () => {
-        queryClient.invalidateQueries('phones');
+        queryClient.invalidateQueries(PHONE_QUERY_NAME);
         showSuccess({ title: 'Phone created', description: 'Phone has been successfully created!' });
       },
     },

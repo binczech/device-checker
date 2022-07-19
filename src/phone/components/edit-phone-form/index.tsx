@@ -41,7 +41,9 @@ const EditPhoneFormBase: FunctionComponent<Props> = (props) => {
     >
       <Title text="Edit phone" />
 
-      <PhoneFormFields />
+      <PhoneFormFields
+        phoneCodeInEdit={code}
+      />
 
       <FormButtons
         edit

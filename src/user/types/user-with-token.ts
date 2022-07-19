@@ -1,6 +1,5 @@
-import { isEmpty } from 'lodash';
 import {
-  equals, isNumber, isObject, isString, keys,
+  equals, isEmpty, isNumber, isObject, isString, keys,
 } from 'lodash/fp';
 
 import { User } from './user';
@@ -11,7 +10,7 @@ export interface UserWithToken extends User {
 }
 
 const isUserWithToken = (x: any): x is UserWithToken => isObject(x)
-    && equals(keys(x))(['id', 'type', 'login', 'name', 'token']);
+    && equals(keys(x).sort())(['id', 'type', 'login', 'name', 'token'].sort());
 
 export const isValidUserWithToken = (x: any): x is UserWithToken => isUserWithToken(x)
     && isString(x.id) && isNumber(Number(x.id))

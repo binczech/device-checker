@@ -1,22 +1,20 @@
 import { has, isString } from 'lodash/fp';
 
-import { API_URL } from 'consts';
 import { showError } from 'layout';
 import { userStorage } from 'user/utils';
+import { fetchData, fetchDataWithToken } from 'utils/fetch-data';
 import { getUser } from 'utils/get-user';
 
 import {
-  isValidUserWithToken, Login, User, UserInStorage, UserWithToken,
+  isValidUser,
+  isValidUserWithToken, Login, User, UserWithToken,
 } from '../types';
 
 export const loginUser = async (login: Login, setUser: ((user: User) => void) | null): Promise<UserWithToken> => {
-  const response = await fetch(`${API_URL}/login`, {
+  const response = await fetchData({
+    pathname: '/login',
     method: 'POST',
     body: JSON.stringify(login),
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
   });
 
   if (response.status === 200) {
@@ -40,15 +38,16 @@ export const loginUser = async (login: Login, setUser: ((user: User) => void) | 
   }
 };
 
-export const fetchUser = async (user: UserInStorage | null): Promise<User> => {
-  const { id, token } = getUser();
+export const fetchUser = async (): Promise<User> => {
+  const { id } = getUser();
 
-  const response = await fetch(`${API_URL}/users/${id}`, {
-    method: 'GET',
-    headers: {
-      'Auth-Token': token,
-    },
-  });
+  const response = await fetchDataWithToken({ pathname: `/users/${id}` });
 
-  return response.json();
+  const data = await response.json();
+
+  if (!isValidUser(data)) {
+    throw new Error('User from server is not valid');
+  }
+
+  return data;
 };
