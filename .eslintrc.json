@@ -1,11 +1,34 @@
 {
     "env": {
         "browser": true,
-        "es2021": true
+        "es2021": true,
+        "jest/globals": true
     },
+    "overrides": [
+      {
+        "files": [
+          "*.spec.ts",
+          "*.spec.tsx",
+          "*.test.ts",
+          "*.test.tsx"
+        ],
+        "env": {
+          "jest": true
+        },
+        "rules": {
+          "@typescript-eslint/explicit-function-return-type": "off",
+          "max-lines": "off",
+          "max-lines-per-function": "off",
+          "no-magic-numbers": "off",
+          "react/jsx-key": "off",
+          "react/jsx-props-no-spreading": "off"
+        }
+      }
+    ],
     "extends": [
         "plugin:react/recommended",
-        "airbnb"
+        "airbnb",
+        "plugin:cypress/recommended"
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
@@ -18,7 +41,8 @@
     "plugins": [
         "react",
         "react-hooks",
-        "@typescript-eslint"
+        "@typescript-eslint",
+        "jest"
     ],
     "settings": {
         "import/resolver": {

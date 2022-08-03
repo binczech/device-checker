@@ -10,7 +10,12 @@ interface Props {
 const PhoneListActionsBase: FunctionComponent<Props> = ({ openPhoneModal }) => (
   <Row gutter={8} justify="end">
     <Col>
-      <Button onClick={openPhoneModal}>Add Phone</Button>
+      <Button
+        testId="open-phone-modal"
+        onClick={openPhoneModal}
+      >
+        Add Phone
+      </Button>
     </Col>
   </Row>
 );

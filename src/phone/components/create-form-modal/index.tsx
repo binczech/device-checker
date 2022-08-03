@@ -18,9 +18,11 @@ const CreateFormModalBase: FunctionComponent<Props> = (props) => {
       footer={null}
       destroyOnClose
     >
-      <CreatePhoneForm
-        onClose={onClose}
-      />
+      <div data-testid="create-form-modal">
+        <CreatePhoneForm
+          onClose={onClose}
+        />
+      </div>
     </Modal>
   );
 };

@@ -18,7 +18,7 @@ interface Props {
     phone: Phone;
 }
 
-const getButtonText = (isBorrowed: boolean, isBorrowedByCurrentUser: boolean) => {
+export const getButtonText = (isBorrowed: boolean, isBorrowedByCurrentUser: boolean) => {
   if (!isBorrowed) return 'Borrow';
 
   return isBorrowedByCurrentUser ? 'Return' : 'Borrowed';

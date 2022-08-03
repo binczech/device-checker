@@ -1,9 +1,11 @@
-export const isLocalStorageAvailable = (): void => {
+export const isLocalStorageAvailable = (): boolean => {
   try {
     const x = '__storage_test__';
     localStorage.setItem(x, x);
     localStorage.removeItem(x);
+
+    return true;
   } catch (e) {
-    throw new Error('Local storage is not available');
+    return false;
   }
 };

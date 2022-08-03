@@ -37,7 +37,7 @@ const LoginFormBase: FunctionComponent<Props> = (props) => {
       </Form.Item>
 
       <Form.Item>
-        <Button htmlType="submit" fullWidth>
+        <Button htmlType="submit" fullWidth testId="submit-login">
           Log in
         </Button>
       </Form.Item>

@@ -11,12 +11,21 @@ interface Props {
   isSiteTitle?: boolean;
   text: string;
   level?: TitleLevel;
+  testId?: string;
 }
 
 const TitleBase: FunctionComponent<Props> = (props) => {
-  const { isSiteTitle, level = 3, text } = props;
+  const {
+    isSiteTitle,
+    level = 3,
+    text,
+    testId,
+  } = props;
   return (
-    <div className={isSiteTitle ? 'siteTitle' : undefined}>
+    <div
+      className={isSiteTitle ? 'siteTitle' : undefined}
+      data-testid={testId}
+    >
       <Typography.Title level={level}>
         {text}
       </Typography.Title>

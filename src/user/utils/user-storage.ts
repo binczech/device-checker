@@ -4,20 +4,22 @@ import { isValidUserInStorage, UserInStorage } from 'user/types';
 
 import { isLocalStorageAvailable } from './is-local-storage-available';
 
-isLocalStorageAvailable();
-
-const item = 'user';
+export const item = 'user';
 const userStorageRegex = /^{"token":(.*),"id":(.*)}$/;
 
 class UserStorage {
   public set(user: UserInStorage): void {
+    if (!isLocalStorageAvailable()) return;
+
     const { id, token } = user;
-    localStorage.setItem(item, JSON.stringify({ token, id }));
+    window.localStorage.setItem(item, JSON.stringify({ token, id }));
   }
 
   public get(): UserInStorage | null {
+    if (!isLocalStorageAvailable()) return null;
+
     try {
-      const localStorageValue = localStorage.getItem(item);
+      const localStorageValue = window.localStorage.getItem(item);
 
       if (isString(localStorageValue) && userStorageRegex.test(localStorageValue)) {
         const user = JSON.parse(localStorageValue);
@@ -32,7 +34,8 @@ class UserStorage {
   }
 
   public delete(): void {
-    localStorage.removeItem(item);
+    if (!isLocalStorageAvailable()) return;
+    window.localStorage.removeItem(item);
   }
 }
 

@@ -7,13 +7,14 @@
     "@testing-library/jest-dom": "5.16.4",
     "@testing-library/react": "13.3.0",
     "@testing-library/user-event": "13.5.0",
-    "@types/jest": "27.5.2",
     "@types/node": "16.11.42",
     "@types/react": "18.0.14",
     "@types/react-dom": "18.0.5",
     "antd": "4.21.5",
     "bootstrap": "5.1.3",
     "classnames": "2.3.1",
+    "cypress": "10.4.0",
+    "identity-obj-proxy": "3.0.0",
     "lodash": "4.17.21",
     "moment": "2.29.4",
     "react": "18.2.0",
@@ -26,8 +27,10 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "test": "jest --maxWorkers=50%",
+    "eject": "react-scripts eject",
+    "e2e-open": "cypress open",
+    "e2e-run": "cypress run"
   },
   "eslintConfig": {
     "extends": [
@@ -48,15 +51,32 @@
     ]
   },
   "devDependencies": {
+    "@types/jest": "28.1.6",
     "@types/lodash": "4.14.182",
     "@typescript-eslint/eslint-plugin": "5.30.3",
     "@typescript-eslint/parser": "5.30.3",
     "eslint": "8.19.0",
     "eslint-config-airbnb": "19.0.4",
+    "eslint-plugin-cypress": "2.12.1",
     "eslint-plugin-import": "2.26.0",
+    "eslint-plugin-jest": "26.7.0",
     "eslint-plugin-jsx-a11y": "6.6.0",
     "eslint-plugin-react": "7.30.1",
     "eslint-plugin-react-hooks": "4.6.0",
-    "sass": "1.53.0"
+    "jest": "28.1.3",
+    "jest-environment-jsdom": "28.1.3",
+    "sass": "1.53.0",
+    "ts-jest": "28.0.7"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "jsdom",
+    "moduleDirectories": [
+      "node_modules",
+      "src"
+    ],
+    "moduleNameMapper": {
+      "\\.(css|scss|sass)$": "identity-obj-proxy"
+    }
   }
 }

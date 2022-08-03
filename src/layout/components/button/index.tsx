@@ -15,6 +15,7 @@ interface Props {
     danger?: boolean;
     title?: string;
     confirm?: boolean;
+    testId?: string;
     onClick?(): void;
 }
 
@@ -29,6 +30,7 @@ const ButtonBase: FunctionComponent<Props> = (props) => {
     danger,
     title,
     confirm,
+    testId,
     onClick,
   } = props;
 
@@ -42,6 +44,7 @@ const ButtonBase: FunctionComponent<Props> = (props) => {
       danger={danger}
       title={title}
       onClick={confirm ? undefined : onClick}
+      data-testid={testId}
     >
       {children}
     </AntButton>
