@@ -28,6 +28,7 @@ const PhoneActionsBase: FunctionComponent<Props> = (props) => {
           title="Delete"
           confirm
           onClick={onDelete}
+          testId="delete-phone"
         />
       </Col>
       <Col>
@@ -36,6 +37,7 @@ const PhoneActionsBase: FunctionComponent<Props> = (props) => {
           type="default"
           title="Edit"
           onClick={openPhoneModal}
+          testId="edit-phone"
         />
       </Col>
     </Row>

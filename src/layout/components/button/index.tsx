@@ -55,6 +55,7 @@ const ButtonBase: FunctionComponent<Props> = (props) => {
       title="Are you sure you want to delete this item?"
       okText="Yes"
       onConfirm={onClick}
+      okButtonProps={{ id: `confirm-${testId}` }}
     >
       {button}
     </Popconfirm>

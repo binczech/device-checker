@@ -9,6 +9,6 @@ describe('User Login', () => {
   });
   it('Correct credentials', () => {
     cy.loginAdmin();
-    cy.url().should('include', '/phones').click();
+    cy.url().should('include', '/phones');
   });
 });

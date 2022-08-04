@@ -55,7 +55,7 @@ const PhoneInfoBase: FunctionComponent<Props> = (props) => {
 
   return (
     <>
-      <div className="phone">
+      <div className="phone" data-testid={`phone_${phone.code}`}>
         {userType === 'admin' && (
         <PhoneActions
           phone={phone}

@@ -21,10 +21,12 @@ const EditFormModalBase: FunctionComponent<Props> = (props) => {
       footer={null}
       destroyOnClose
     >
-      <EditPhoneForm
-        phone={phone}
-        onClose={onClose}
-      />
+      <div data-testid="edit-form-modal">
+        <EditPhoneForm
+          phone={phone}
+          onClose={onClose}
+        />
+      </div>
     </Modal>
   );
 };

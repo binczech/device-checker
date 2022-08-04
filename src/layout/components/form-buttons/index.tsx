@@ -19,7 +19,7 @@ const FormButtonsBase: FunctionComponent<Props> = (props) => {
         </Button>
       </Col>
       <Col>
-        <Button htmlType="submit">
+        <Button htmlType="submit" testId="submit-form">
           {edit ? 'Edit' : 'Create'}
         </Button>
       </Col>
